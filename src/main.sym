@@ -1,0 +1,102 @@
+W0      @SCRATCH
+W0L     _RETURN_
+W0 -W1  @ADDFF.P1
+W0 -W1  @READ_ROM_MEMORY.P2
+W0 -W3  @F64TO48.P3
+W0 -W1  @MULFF.P4
+W0      @delay_ms1.P5
+W0 -W1  @DIV3232B.P6
+W0 -W1  @FTOSD.P7
+W0 -W3  @DIVFF64.P8
+W0 -W1  @FLT.P9
+W0 -W1  @PRINTFD32_115200_5725_5724.P10
+W0 -W3  @MULFF64.P11
+W0      @delay_us1.P12
+W0 -W1  @SFTOI.P13
+W0 -W3  @F64TOSI64.P14
+W0 -W3  @SI64TOF64.P15
+W0 -W1  @SDTOF.P16
+W1      @SCRATCH
+W1      @READ_PACKED_MEMORY.P1
+W1      @WRITE_PACKED_MEMORY.P2
+W2 -W3  @FLT.P1
+W2      @READ_PACKED_MEMORY.P2
+W2      @READ_ROM_MEMORY.P3
+W2 -W3  @ADDFF.P4
+W2 -W3  @DIV3232B.P5
+W2      @WRITE_PACKED_MEMORY.P6
+W2 -W3  @MULFF.P7
+W3      @READ_PACKED_MEMORY.P1
+W3      @WRITE_PACKED_MEMORY.P2
+W3      @READ_ROM_MEMORY.P3
+W4 -W7  @MULFF64.P1
+W4 -W7  @DIVFF64.P2
+W4      @PRINTFD32_115200_5725_5724.P3
+630.6   C1OUT
+630.7   C2OUT
+800-803 count
+804-807 time
+808-80B u
+80C-80F y
+810.0   trig
+81A-81D printFloat.n
+81E-821 printFloat.dec
+822-825 printFloat.degit
+824-825 findDistanceZ.pulse
+2780-27FF Stack
+
+ROM Allocation:
+000DFC  @ADDFF
+000FA6  @SI64TOF64
+00100A  @DIVFF64
+001112  @F64TOSI64
+001168  @MULFF64
+001278  @F64TO48
+0012BC  findDistanceZ
+001342  @SFTOI
+00136E  @SDTOF
+0013BC  @MULFF
+001480  @FTOSD
+0014C0  @DIV3232B
+001504  @PRINTFD32_115200_5725_5724
+001618  printFloat
+00167E  @FLT
+0016E6  TIMER3_isr
+0017AA  INT_EXT_INPUT1
+0017E2  INT_EXT_INPUT2
+00181A  initTimer23
+00182A  setupEncoderInterrupt
+001834  MAIN
+001834  @cinit1
+00188C  @cinit2
+
+Project Directory:
+    P:\Module67\control\Common_PIC\src\
+
+Project Files:
+    main.c                                                  [17-Sep-18 01:45  CRC=8DCEE2B0]
+    lib\24FJ48GA002.h                                       [17-Sep-18 00:37  CRC=2B092578]
+    lib\BL_Support.h                                        [17-Sep-18 00:37  CRC=87294453]
+
+Source signature=C72A90CE
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC24FJ48GA002
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: SIGNED: 8,16,32
+    Float,Double:   32,64
+
+Output Files:
+    Errors:      main.err
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/eCOD:  main.cod
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA
