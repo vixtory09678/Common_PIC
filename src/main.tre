@@ -1,0 +1,34 @@
+ÀÄmain
+   ÃÄMAIN  0/134  Ram=2
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄinitTimer23  0/16  Ram=0
+   ³  ÀÄsetupEncoderInterrupt  0/10  Ram=0
+   ÃÄTIMER3_isr  0/196  Ram=3
+   ³  ÃÄ@ADDFF  0/426  Ram=8
+   ³  ÃÄ@SI64TOF64  0/100  Ram=0
+   ³  ÃÄ@DIVFF64  0/264  Ram=8
+   ³  ÃÄ@F64TOSI64  0/86  Ram=0
+   ³  ÃÄfindDistanceZ  0/134  Ram=11
+   ³  ³  ÃÄ@SI64TOF64  0/100  Ram=0
+   ³  ³  ÃÄ@DIVFF64  0/264  Ram=8
+   ³  ³  ÃÄ@DIVFF64  0/264  Ram=8
+   ³  ³  ÃÄ@MULFF64  0/272  Ram=0
+   ³  ³  ÀÄ@F64TO48  0/68  Ram=0
+   ³  ÃÄ@ADDFF  0/426  Ram=8
+   ³  ÃÄprintFloat  0/102  Ram=17
+   ³  ³  ÃÄ@SFTOI  0/44  Ram=4
+   ³  ³  ÃÄ@SDTOF  0/78  Ram=4
+   ³  ³  ÃÄ@ADDFF  0/426  Ram=8
+   ³  ³  ÃÄ@MULFF  0/196  Ram=8
+   ³  ³  ÃÄ@FTOSD  0/64  Ram=4
+   ³  ³  ÃÄ@PRINTFD32_115200_5725_5724  0/276  Ram=0
+   ³  ³  ³  ÀÄ@DIV3232B  0/68  Ram=8
+   ³  ³  ÀÄ@PRINTFD32_115200_5725_5724  0/276  Ram=0
+   ³  ³     ÀÄ*
+   ³  ÃÄprintFloat  0/102  Ram=17
+   ³  ³  ÀÄ*
+   ³  ÃÄprintFloat  0/102  Ram=17
+   ³  ³  ÀÄ*
+   ³  ÀÄ@FLT  0/104  Ram=8
+   ÃÄINT_EXT_INPUT1  0/56  Ram=2
+   ÀÄINT_EXT_INPUT2  0/56  Ram=2

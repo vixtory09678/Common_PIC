@@ -11,7 +11,7 @@
 #PIN_SELECT U1TX = PIN_B13 // pin_b15
 #use rs232(UART1, BAUD = 115200, XMIT = PIN_B13, RCV = PIN_B12)
 
-#PIN_SELECT INT1 = PIN_B4  
+#PIN_SELECT INT1 = PIN_B4
 #PIN_SELECT INT2 = PIN_B5
 
 #PIN_SELECT oc1 = PIN_B2
@@ -21,7 +21,7 @@
 #define Lead 8f          // Lead length
 #define SET_POINT 400f
 
-int count = 0;
+long count = 0;
 float time = 0.0;
 float u = 12.0;
 float y = 0.0;
@@ -32,18 +32,18 @@ float findDistanceZ(int pulse){
     return (pulse / 2.0) / RESOLUTION * Lead;
 }
 
-void printFloat(float n) 
-{ 
-    int dec = (int)n; 
-    int degit = (n - (float)dec) * 100; 
+void printFloat(float n)
+{
+    long dec = (int)n;
+    long degit = (n - (float)dec) * 100;
     printf("%d.%d",dec,degit);
-} 
+}
 
 #INT_TIMER3
 void TIMER3_isr(void){
     if(trig){
         time+=0.01;
-        y = SET_POINT - findDistanceZ(count);
+        y =  SET_POINT - findDistanceZ(count/2.0);
         printFloat(time);
         printf(",");
         printFloat(u);
@@ -51,7 +51,7 @@ void TIMER3_isr(void){
         printFloat(y);
         printf("\r\n");
 
-        if(time > 9.0){
+        if(time > 10.0){
             trig = false;
         }
     }
@@ -107,6 +107,8 @@ void main(void){
         // press SW3 to start sampling log
         if(input(PIN_B6) == 0){
             trig = true;
+            time = 0.0;
+            y = 0.0;
         }
     }
 }
