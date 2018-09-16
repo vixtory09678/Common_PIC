@@ -43,7 +43,7 @@ void printFloat(float n)
 void TIMER3_isr(void){
     if(trig){
         time+=0.01;
-        y =  SET_POINT - findDistanceZ(count/2.0);
+        y =  SET_POINT - findDistanceZ(count);
         printFloat(time);
         printf(",");
         printFloat(u);
