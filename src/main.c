@@ -18,7 +18,7 @@
 
 #define TIME_PERIOD 20000
 #define RESOLUTION 600f
-#define Lead 8f          // Lead length
+#define Lead 8f // Lead length
 #define SET_POINT 400f
 
 long count = 0;
@@ -28,7 +28,8 @@ float y = 0.0;
 
 boolean trig = false;
 
-float findDistanceZ(int pulse){
+float findDistanceZ(long pulse)
+{
     return (pulse / 2.0) / RESOLUTION * Lead;
 }
 
@@ -36,76 +37,96 @@ void printFloat(float n)
 {
     long dec = (int)n;
     long degit = (n - (float)dec) * 100;
-    printf("%d.%d",dec,degit);
+    printf("%d.%d%d", dec, degit / 10, degit % 10);
 }
 
 #INT_TIMER3
-void TIMER3_isr(void){
-    if(trig){
-        time+=0.01;
-        y =  SET_POINT - findDistanceZ(count);
+void TIMER3_isr(void)
+{
+    if (trig)
+    {
+        time += 0.01;
+        y = SET_POINT - findDistanceZ(count);
         printFloat(time);
         printf(",");
         printFloat(u);
         printf(",");
         printFloat(y);
-        printf("\r\n");
+        printf("\n");
 
-        if(time > 10.0){
+        if (time > 10.0)
+        {
+            if (trig == true)
+            {
+                printf("end\n");
+            }
             trig = false;
         }
     }
 }
 
 #INT_EXT1
-void INT_EXT_INPUT1(void){
-    if(trig){
-        if (input(PIN_B5) == 1){
+void INT_EXT_INPUT1(void)
+{
+    if (trig)
+    {
+        if (input(PIN_B5) == 1)
+        {
             count++;
-        }else{
+        }
+        else
+        {
             count--;
         }
     }
 }
-
 
 #INT_EXT2
-void INT_EXT_INPUT2(void){
-    if(trig){
-        if (input(PIN_B4) == 1){
+void INT_EXT_INPUT2(void)
+{
+    if (trig)
+    {
+        if (input(PIN_B4) == 1)
+        {
             count--;
         }
-        else{
+        else
+        {
             count++;
         }
     }
 }
 
-void setupEncoderInterrupt(){
+void setupEncoderInterrupt()
+{
     enable_interrupts(INT_EXT1);
     ext_int_edge(1, H_TO_L);
     enable_interrupts(INT_EXT2);
     ext_int_edge(2, H_TO_L);
 }
 
-void initTimer23(){
+void initTimer23()
+{
     setup_timer2(TMR_INTERNAL | TMR_DIV_BY_8 | TMR_32_BIT, TIME_PERIOD);
     enable_interrupts(INT_TIMER3);
 }
 
-void main(void){
+void main(void)
+{
 
     // initialize count to zero
     count = 0;
-
     disable_interrupts(GLOBAL);
     initTimer23();
     setupEncoderInterrupt();
     enable_interrupts(GLOBAL);
 
-    while (TRUE){
+    while (TRUE)
+    {
         // press SW3 to start sampling log
-        if(input(PIN_B6) == 0){
+        if (input(PIN_B6) == 0)
+        {
+            count = 0;
             trig = true;
             time = 0.0;
             y = 0.0;
