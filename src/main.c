@@ -16,7 +16,7 @@
 
 #PIN_SELECT oc1 = PIN_B2
 
-#define TIME_PERIOD 20000
+#define TIME_PERIOD 625
 #define RESOLUTION 600f
 #define Lead 8f // Lead length
 #define SET_POINT 400f
@@ -36,7 +36,9 @@ float findDistanceZ(long pulse)
 void printFloat(float n)
 {
     long dec = (int)n;
-    long degit = (n - (float)dec) * 100;
+    long degit = (n - dec) * 100;
+
+    degit = (degit < 0) ? abs(degit) : degit;
     printf("%d.%d%d", dec, degit / 10, degit % 10);
 }
 
@@ -46,7 +48,7 @@ void TIMER3_isr(void)
     if (trig)
     {
         time += 0.01;
-        y = SET_POINT - findDistanceZ(count);
+        y = findDistanceZ(count);
         printFloat(time);
         printf(",");
         printFloat(u);
@@ -81,34 +83,16 @@ void INT_EXT_INPUT1(void)
     }
 }
 
-#INT_EXT2
-void INT_EXT_INPUT2(void)
-{
-    if (trig)
-    {
-        if (input(PIN_B4) == 1)
-        {
-            count--;
-        }
-        else
-        {
-            count++;
-        }
-    }
-}
-
 void setupEncoderInterrupt()
 {
     enable_interrupts(INT_EXT1);
     ext_int_edge(1, H_TO_L);
-    enable_interrupts(INT_EXT2);
-    ext_int_edge(2, H_TO_L);
 }
 
-void initTimer23()
+void initTimer2()
 {
-    setup_timer2(TMR_INTERNAL | TMR_DIV_BY_8 | TMR_32_BIT, TIME_PERIOD);
-    enable_interrupts(INT_TIMER3);
+    setup_timer2(TMR_INTERNAL | TMR_DIV_BY_256, TIME_PERIOD);
+    enable_interrupts(INT_TIMER2);
 }
 
 void main(void)
@@ -117,7 +101,7 @@ void main(void)
     // initialize count to zero
     count = 0;
     disable_interrupts(GLOBAL);
-    initTimer23();
+    initTimer2();
     setupEncoderInterrupt();
     enable_interrupts(GLOBAL);
 
